@@ -2,6 +2,7 @@ package com.example.storeeverything.Controllers;
 
 import com.example.storeeverything.Dtos.UserRegistrationDto;
 import com.example.storeeverything.Services.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,12 +24,12 @@ public class AuthController {
         return "registration";
     }
     @PostMapping("/Register")
-    public String registerUserAccount(@ModelAttribute("user") UserRegistrationDto userRegistrationDto, BindingResult result){
+    public String registerUserAccount(@Valid @ModelAttribute("user") UserRegistrationDto userRegistrationDto, BindingResult result){
     if(result.hasErrors()){
         return  "registration";
     }
 
     userService.sve(userRegistrationDto);
-    return "redirect:/Auth/Register?success";
+    return "redirect:/Auth?success";
     }
 }
