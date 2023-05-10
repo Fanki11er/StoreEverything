@@ -5,6 +5,8 @@ import com.example.storeeverything.Entities.User;
 import com.example.storeeverything.Repositories.UserRepository;
 import com.example.storeeverything.Role;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,5 +23,10 @@ public class UserServiceImpl implements UserService {
                             registrationDto.getAge(),
                             Role.LIMITED);
         return  userRepository.save(user);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return null;
     }
 }
