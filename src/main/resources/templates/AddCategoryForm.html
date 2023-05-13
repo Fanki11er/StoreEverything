@@ -2,16 +2,20 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Add category</title>
+    <title>Dodaj kategorię</title>
 </head>
 <body>
-<h1>Add Category</h1>
-<form method="post" th:action="@{/categories/save}" th:object="${category}">
-    <label for="name">Name:</label>
-    <input type="text" id="name" name="name" th:field="*{name}" />
-    <button type="submit">Save</button>
+<h1>Dodaj kategorię</h1>
+<form action="#" th:action="@{/Categories/Save}" th:object="${category}" method="post">
+    <p>
+        <label for="name">Nazwa kategorii:</label>
+        <input type="text" id="name" th:field="*{name}" />
+    <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Błędna nazwa kategorii.</div>
+    </p>
+    <p>
+        <input type="submit" value="Dodaj" />
+    </p>
 </form>
-
 
 </body>
 </html>

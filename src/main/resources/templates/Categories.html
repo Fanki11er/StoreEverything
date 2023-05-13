@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Categories</title>
+</head>
+<body>
+<h1>Categories</h1>
+
+<a th:href="${'/Categories/New'}">Dodaj nową kategorię</a>
+
+<div th:if="${not #lists.isEmpty(categories)}">
+    <table>
+        <tr>
+            <th>Nazwa kategorii</th>
+            <th>Akcje</th>
+        </tr>
+        <tr th:each="category : ${categories}">
+            <td th:text="${category.name}"></td>
+            <td>
+                <form th:action="@{'/Categories/Delete/' + ${category.id}}" method="post">
+                    <input type="hidden" name="_method" value="DELETE" />
+                    <button type="submit">Usuń</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>
