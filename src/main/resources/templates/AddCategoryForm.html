@@ -3,19 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <title>Dodaj kategorię</title>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
-<h1>Dodaj kategorię</h1>
-<form action="#" th:action="@{/Categories/Save}" th:object="${category}" method="post">
-    <p>
-        <label for="name">Nazwa kategorii:</label>
-        <input type="text" id="name" th:field="*{name}" />
-    <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Błędna nazwa kategorii.</div>
-    </p>
-    <p>
-        <input type="submit" value="Dodaj" />
-    </p>
-</form>
+
+<div th:insert="fragments/navbar :: navbar"></div>
+
+<div class="content">
+    <h1 class="m-2">Dodaj kategorię</h1>
+
+    <form action="#" th:action="@{/Categories/Save}" th:object="${category}" method="post">
+        <p class="m-2 mb-5">
+            <label class="form-control bg-dark text-light" for="name">Nazwa kategorii:</label>
+            <input class="form-control" type="text" id="name" th:field="*{name}"/>
+        <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Błędna nazwa kategorii.</div>
+        </p>
+        <p>
+            <input class="btn btn-dark m-lg-2" type="submit" value="Dodaj"/>
+        </p>
+    </form>
+</div>
 
 </body>
 </html>

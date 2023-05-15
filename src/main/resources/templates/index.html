@@ -1,12 +1,18 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Store Everything</title>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
 
-<h1>Witaj w aplikacji Store Everything</h1>
-<a th:href="${'/Categories'}">Kategorie</a>
+<div th:insert="fragments/navbar :: navbar"></div>
+
+<div class="content">
+    <h1 class="m-2">Witaj w aplikacji Store Everything</h1>
+</div>
+
 </body>
 </html>
