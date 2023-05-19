@@ -1,7 +1,9 @@
 package com.example.storeeverything.Controllers;
 
 import com.example.storeeverything.Dtos.UserRegistrationDto;
+import com.example.storeeverything.Services.UserRegisterService;
 import com.example.storeeverything.Services.UserService;
+import com.example.storeeverything.Services.UserServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,19 +19,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AuthController {
 
     @Autowired
-    private UserService userService;
-    @GetMapping
+    private UserRegisterService userService;
+    @GetMapping("/Register")
     public  String showRegistrationForm(Model model){
         model.addAttribute("user",new UserRegistrationDto() );
         return "registration";
     }
-    @PostMapping("/Register")
+    @PostMapping("/Register/Reg")
     public String registerUserAccount(@Valid @ModelAttribute("user") UserRegistrationDto userRegistrationDto, BindingResult result){
-    if(result.hasErrors()){
+        if(result.hasErrors()){
         return  "registration";
     }
+    userService.save(userRegistrationDto);
+    return "redirect:/Auth/Register?success";
+    }
 
-    userService.sve(userRegistrationDto);
-    return "redirect:/Auth?success";
+    @GetMapping("/Login")
+    public  String login(){
+        return "login";
     }
 }

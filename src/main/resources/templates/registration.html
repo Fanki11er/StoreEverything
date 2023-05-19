@@ -36,7 +36,7 @@
     <div class="alert alert-info">User registered</div>
 </div>
 <h1>Registration</h1>
-<form th:action="@{/Auth/Register}" th:object="${user}" method="post" novalidate>
+<form th:action="@{/Auth/Register/Reg}" th:object="${user}" method="post" novalidate>
     <div class="mb-3">
         <label for="firstName" class="form-label">First name</label>
         <input type="text" class="form-control" id="firstName" th:field="*{firstName}">

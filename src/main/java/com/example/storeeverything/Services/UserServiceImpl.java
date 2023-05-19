@@ -1,32 +1,21 @@
 package com.example.storeeverything.Services;
-
-import com.example.storeeverything.Dtos.UserRegistrationDto;
-import com.example.storeeverything.Entities.User;
+import com.example.storeeverything.Dtos.SecurityUserDto;
 import com.example.storeeverything.Repositories.UserRepository;
-import com.example.storeeverything.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-@Service
-public class UserServiceImpl implements UserService {
 
+
+@Service
+public class UserServiceImpl implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
-    @Override
-    public User sve(UserRegistrationDto registrationDto) {
-        User user = new User(registrationDto.getFirstName(),
-                            registrationDto.getSurname(),
-                            registrationDto.getLogin(),
-                            registrationDto.getPassword(),
-                            registrationDto.getAge(),
-                            Role.LIMITED);
-        return  userRepository.save(user);
-    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return null;
+        return userRepository.findByLogin(username).map(SecurityUserDto::new).orElseThrow(() -> new UsernameNotFoundException("Nie prawidłowe dane"));
     }
 }
