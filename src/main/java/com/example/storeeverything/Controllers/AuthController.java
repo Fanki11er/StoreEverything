@@ -21,21 +21,24 @@ public class AuthController {
     @Autowired
     private UserRegisterService userService;
     @GetMapping("/Register")
-    public  String showRegistrationForm(Model model){
+    public  String showRegistrationForm( Model model){
         model.addAttribute("user",new UserRegistrationDto() );
+        model.addAttribute("path", "Register");
         return "registration";
     }
     @PostMapping("/Register/Reg")
-    public String registerUserAccount(@Valid @ModelAttribute("user") UserRegistrationDto userRegistrationDto, BindingResult result){
+    public String registerUserAccount(@Valid @ModelAttribute("user") UserRegistrationDto userRegistrationDto, BindingResult result, Model model){
         if(result.hasErrors()){
+            model.addAttribute("path", "Register");
         return  "registration";
     }
     userService.save(userRegistrationDto);
-    return "redirect:/Auth/Register?success";
+    return "redirect:/Auth/Login?success";
     }
 
     @GetMapping("/Login")
-    public  String login(){
+    public  String login(Model model){
+        model.addAttribute("path", "Login");
         return "login";
     }
 }

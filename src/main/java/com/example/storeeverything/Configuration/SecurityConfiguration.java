@@ -60,7 +60,7 @@ public class SecurityConfiguration {
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/Auth/Login").usernameParameter("login").successForwardUrl("/Main")
+                .loginPage("/Auth/Login").usernameParameter("login").defaultSuccessUrl("/Main")
                 .permitAll()
                 .and()
                 .logout()
