@@ -10,12 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -25,27 +20,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableMethodSecurity
 public class SecurityConfiguration {
 
-//    public UserDetailsService userDetailsService(PasswordEncoder passwordEncoder){
-//        return new UserServiceImpl();
-//    }
-//
-//    @Bean
-//    BCryptPasswordEncoder passwordEncoder(){
-//        return  new BCryptPasswordEncoder();
-//    }
-
-//    @Bean
-//    DaoAuthenticationProvider authenticationProvider(){
-//        DaoAuthenticationProvider auth = new DaoAuthenticationProvider();
-//        auth.setUserDetailsService(userService);
-//        auth.setPasswordEncoder(passwordEncoder());
-//        return auth;
-//    }
-
-//    @Bean
-//    public void configure(AuthenticationManagerBuilder auth) throws Exception{
-//        auth.authenticationProvider(authenticationProvider());
-//    }
     @Autowired
     private UserServiceImpl userService;
 
@@ -60,7 +34,7 @@ public class SecurityConfiguration {
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/Auth/Login").usernameParameter("login").defaultSuccessUrl("/Main")
+                .loginPage("/Auth/Login").usernameParameter("login").defaultSuccessUrl("/App/User/Me")
                 .permitAll()
                 .and()
                 .logout()

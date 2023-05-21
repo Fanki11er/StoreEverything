@@ -13,7 +13,6 @@ public class SecurityUserDto implements UserDetails {
     private User user;
 
     public SecurityUserDto(User user){
-        System.out.println("User " + user);
         this.user = user;
     }
     @Override
