@@ -9,7 +9,7 @@
 </head>
 <body sec:authorize="isAuthenticated()">
 
-<div th:replace="appNavbar.html :: appNavbar(path=${path})"></div>
+<div th:replace="appNavbar.html :: appNavbar(path=${path}, role=${me.getRole()})"></div>
 <div class="container col-md-4">
   <h1 class="my-4">Użytkownik</h1>
 

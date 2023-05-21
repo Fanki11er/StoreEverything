@@ -22,8 +22,9 @@ public class UserController {
     @GetMapping("/Me")
     public  String getUserInfo( Model model){
         SecurityUserDto auth = (SecurityUserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-       // Get user from database
-        model.addAttribute("me", auth.getUsername());
+        UserDto user = userService.loadUserDtoByUsername(auth.getUsername());
+
+        model.addAttribute("me", user);
         model.addAttribute("path", "User");
         return "appUser";
     }

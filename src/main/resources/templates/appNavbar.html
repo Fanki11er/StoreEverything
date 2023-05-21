@@ -1,5 +1,5 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<div th:fragment="appNavbar (path)">
+<div th:fragment="appNavbar (path, role)">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3" >
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -10,12 +10,12 @@
                     <a class="nav-link" href="#" th:href="@{/App/User}"  th:classappend="${#strings.startsWith(path, 'User')} ? 'active disabled'">Użytkownik</a>
                 </li>
                 <li class="nav-item mr-5" >
-                    <a class="nav-link" href="#" th:href="@{/App/Items}" th:classappend="${#strings.startsWith(path, 'Items')} ? 'active disabled'">Informacje</a>
+                    <a class="nav-link" href="#" th:href="@{/App/Items}" th:classappend="${#strings.startsWith(path, 'Items')} ? 'active disabled'" th:if="${#strings.equals(role, 'ADMIN')} or ${#strings.equals(role, 'FULL')} ">Informacje</a>
                 </li>
                 <li class="nav-item mr-5" >
                     <a class="nav-link" href="#" th:href="@{/App/Shared}" th:classappend="${#strings.startsWith(path, 'Shared')} ? 'active disabled'">Udostępnione</a>
                 </li>
-                <li class="nav-item mr-5"  >
+                <li class="nav-item mr-5"  th:if="${#strings.equals(role, 'ADMIN')}">
                     <a class="nav-link" href="#" th:href="@{/App/Admin}" th:classappend="${#strings.startsWith(path, 'Admin')} ? 'active disabled'">Administracja</a>
                 </li>
             </ul>
