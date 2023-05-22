@@ -1,7 +1,9 @@
 package com.example.storeeverything.Controllers;
 
 import com.example.storeeverything.Dtos.UserRegistrationDto;
+import com.example.storeeverything.Services.UserRegisterService;
 import com.example.storeeverything.Services.UserService;
+import com.example.storeeverything.Services.UserServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,19 +19,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AuthController {
 
     @Autowired
-    private UserService userService;
-    @GetMapping
-    public  String showRegistrationForm(Model model){
+    private UserRegisterService userService;
+    @GetMapping("/Register")
+    public  String showRegistrationForm( Model model){
         model.addAttribute("user",new UserRegistrationDto() );
+        model.addAttribute("path", "Register");
         return "registration";
     }
-    @PostMapping("/Register")
-    public String registerUserAccount(@Valid @ModelAttribute("user") UserRegistrationDto userRegistrationDto, BindingResult result){
-    if(result.hasErrors()){
+    @PostMapping("/Register/Reg")
+    public String registerUserAccount(@Valid @ModelAttribute("user") UserRegistrationDto userRegistrationDto, BindingResult result, Model model){
+        if(result.hasErrors()){
+            model.addAttribute("path", "Register");
         return  "registration";
     }
+    userService.save(userRegistrationDto);
+    return "redirect:/Auth/Login?success";
+    }
 
-    userService.sve(userRegistrationDto);
-    return "redirect:/Auth?success";
+    @GetMapping("/Login")
+    public  String login(Model model){
+        model.addAttribute("path", "Login");
+        return "login";
     }
 }

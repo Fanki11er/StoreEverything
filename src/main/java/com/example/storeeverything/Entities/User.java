@@ -34,13 +34,13 @@ public class User {
     private String surname;
     @Column(name = "login",  length = 20, nullable = false)
     private String login;
-    @Column(name = "password",  length = 20, nullable = false)
+    @Column(name = "password",  length = 128, nullable = false)
     private String password;
     @Column(name = "age",  length = 3, nullable = false)
     private Integer age;
     @Column(name = "role",  length = 10, nullable = false)
     private Role role;
-    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
     List<Item> items;
 
 
