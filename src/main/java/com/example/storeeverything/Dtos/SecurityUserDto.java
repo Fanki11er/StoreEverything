@@ -28,6 +28,10 @@ public class SecurityUserDto implements UserDetails {
         ArrayList<SimpleGrantedAuthority> userRoles = new ArrayList<>();
       return  userRoles;
     }
+
+    public String getRole(){
+        return  user.getRole().name();
+    }
     @Override
     public boolean isAccountNonExpired() {
         return true;

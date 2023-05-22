@@ -9,23 +9,33 @@
 </head>
 <body sec:authorize="isAuthenticated()">
 
-<div th:replace="appNavbar.html :: appNavbar(path=${path}, role=${me.getRole()})"></div>
+<div th:replace="appNavbar.html :: appNavbar(path=${path}, role=${loggedUserRole})"></div>
 
 <div class="container col-sm-8 col-md-6 col-lg-4">
   <div class="card">
-    <div class="card-header fw-bold fs-3 p-4 text-center" th:text="'Użytkownik: '+ ${me.getLogin()}"></div>
+    <div class="card-header fw-bold fs-3 p-4 text-center" th:text="'Użytkownik '+ ${user.getLogin()}"></div>
     <div class="card-body px-4 fs-5">
+
       <div class="row">
         <span class="card-title fw-bold col-auto">Imię:</span>
-        <span class="card-text col" th:text="${me.getFirstName()}"></span>
+        <span class="card-text col" th:text="${user.getFirstName()}"></span>
       </div>
       <div class="row">
         <span class="card-title fw-bold col-auto" >Nazwisko:</span>
-        <span class="card-text col" th:text="${me.getSurname()}"></span>
+        <span class="card-text col" th:text="${user.getSurname()}"></span>
+      </div>
+      <div class="row">
+        <span class="card-title fw-bold col-auto" >Wiek::</span>
+        <span class="card-text col" th:text="${user.getAge()}"></span>
+      </div>
+      <div class="row">
+        <span class="card-title fw-bold col-auto" >Rola:</span>
+        <span class="card-text col" th:text="${user.getRole()}"></span>
       </div>
       <div class="row my-3 justify-content-center">
-      <a href="#" class=" btn btn-primary ">Edytuj informacje</a>
+        <a href="#" class=" btn btn-primary ">Zapisz zmiany</a>
       </div>
+
     </div>
   </div>
 
