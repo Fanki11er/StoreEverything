@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dodaj informację</title>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div th:insert="fragments/navbar :: navbar"></div>
+
+<div class="content">
+    <h1 class="m-2">Dodaj Informację</h1>
+
+    <form action="#" th:action="@{/Items/Save}" th:object="${item}" method="post">
+        <p class="m-2 mb-5">
+            <label class="form-control bg-dark text-light" for="title">Tytuł</label>
+            <input class="form-control" type="text" id="title" th:field="*{title}"/>
+        <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Błędny tytuł.</div>
+        </p>
+
+        <p class="m-2 mb-5">
+            <label class="form-control bg-dark text-light" for="content">Treść</label>
+            <input class="form-control" type="text" id="content" th:field="*{content}"/>
+        <div th:if="${#fields.hasErrors('content')}" th:errors="*{content}">Błędna treść.</div>
+        </p>
+
+        <p class="m-2 mb-5">
+            <label class="form-control bg-dark text-light" for="url">Url</label>
+            <input class="form-control" type="text" id="url" th:field="*{url}"/>
+        <div th:if="${#fields.hasErrors('url')}" th:errors="*{url}">Błędny url.</div>
+        </p>
+
+        <p class="m-2 mb-5">
+            <label class="form-control bg-dark text-light" for="category">Kategoria</label>
+            <select class="form-control" id="category" th:field="*{category}">
+                <option value="">-- Wybierz kategorię --</option>
+                <option th:each="category : ${categories}" th:value="${category}" th:text="${category.name}"></option>
+            </select>
+        </p>
+
+        <p>
+            <input class="btn btn-dark m-lg-2" type="submit" value="Dodaj"/>
+        </p>
+    </form>
+</div>
+</body>
+</html>
