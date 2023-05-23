@@ -28,13 +28,25 @@
         <span class="card-title fw-bold col-auto" >Wiek::</span>
         <span class="card-text col" th:text="${user.getAge()}"></span>
       </div>
-      <div class="row">
-        <span class="card-title fw-bold col-auto" >Rola:</span>
-        <span class="card-text col" th:text="${user.getRole()}"></span>
-      </div>
-      <div class="row my-3 justify-content-center">
-        <a href="#" class=" btn btn-primary ">Zapisz zmiany</a>
-      </div>
+<!--      <div class="row">-->
+<!--        <span class="card-title fw-bold col-auto" >Rola:</span>-->
+<!--        <span class="card-text col" th:text="${user.getRole()}"></span>-->
+<!--      </div>-->
+      <form th:action="@{'/App/Admin/User/Edit?id=' + ${user.getId()}}" th:object="${newRole}" method="post" novalidate>
+        <div class="mb-3">
+<!--          <label for="role" class="form-label">Rola użytkownika</label>-->
+          <select  class="form-select" aria-label="Default select example" id="newRole" name="newRole">
+            <option selected th:value="${user.getRole()}" th:text="${user.getRole()}"></option>
+            <option th:each="role: ${roles}" th:value="${role}" th:text="${role}" ></option>
+          </select>
+<!--          <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"-->
+<!--                class="invalid-feedback d-block"></span>-->
+        </div>
+          <div class="row my-3 justify-content-center">
+              <button type="submit" class=" btn btn-primary ">Zapisz zmiany</button>
+          </div>
+      </form>
+
 
     </div>
   </div>
