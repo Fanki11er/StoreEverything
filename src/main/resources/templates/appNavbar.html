@@ -15,6 +15,9 @@
                 <li class="nav-item mr-5" >
                     <a class="nav-link" href="#" th:href="@{/App/Shared}" th:classappend="${#strings.startsWith(path, 'Shared')} ? 'active disabled'">Udostępnione</a>
                 </li>
+                <li class="nav-item mr-5"  th:if="${#strings.equals(role, 'ADMIN')} or ${#strings.equals(role, 'FULL')} ">
+                    <a class="nav-link" href="#" th:href="@{/App/Categories}" th:classappend="${#strings.startsWith(path, 'Categories')} ? 'active disabled'">Kategorie</a>
+                </li>
                 <li class="nav-item mr-5"  th:if="${#strings.equals(role, 'ADMIN')}">
                     <a class="nav-link" href="#" th:href="@{/App/Admin}" th:classappend="${#strings.startsWith(path, 'Admin')} ? 'active disabled'">Administracja</a>
                 </li>

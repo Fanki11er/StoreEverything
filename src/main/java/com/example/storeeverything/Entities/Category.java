@@ -21,7 +21,7 @@ public class Category {
         private long id;
         @Column(name = "name", nullable = false)
         @Size(min = 3, max = 20, message = "Nazwa karegorii powinna mieć długość od {min} do {max} znaków.")
-        @Pattern(regexp = "^[a-z]+$", message = "Nazwa kategorii powinna składać się wyłącznie z małych liter.")
+        @Pattern(regexp = "^[a-ząłćźżęóś]+$", message = "Nazwa kategorii powinna składać się wyłącznie z małych liter.")
         private String name;
 
 }
