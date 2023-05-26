@@ -1,6 +1,7 @@
 package com.example.storeeverything.Services;
 import com.example.storeeverything.Dtos.SecurityUserDto;
 import com.example.storeeverything.Dtos.UserDto;
+import com.example.storeeverything.Entities.User;
 import com.example.storeeverything.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -9,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 
 
 @Service
@@ -28,6 +30,12 @@ public class UserServiceImpl implements UserDetailsService {
     public String getLoggedUserRole(){
         SecurityUserDto auth = (SecurityUserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return  auth.getRole();
+    }
+
+    public User getLoggedUserEntity(){
+        SecurityUserDto auth = (SecurityUserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userRepository.findByLogin(auth.getUsername()).orElseThrow(() -> new UsernameNotFoundException("Nie znaleziono użytkownika"));
+        return user;
     }
 }
 

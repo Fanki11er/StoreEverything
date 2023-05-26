@@ -10,7 +10,7 @@
                     <a class="nav-link" href="#" th:href="@{/App/User}"  th:classappend="${#strings.startsWith(path, 'User')} ? 'active disabled'">Użytkownik</a>
                 </li>
                 <li class="nav-item mr-5" >
-                    <a class="nav-link" href="#" th:href="@{/App/Items}" th:classappend="${#strings.startsWith(path, 'Items')} ? 'active disabled'" th:if="${#strings.equals(role, 'ADMIN')} or ${#strings.equals(role, 'FULL')} ">Informacje</a>
+                    <a class="nav-link" href="#" th:href="@{/App/Items}" th:classappend="${#strings.startsWith(path, 'Information')} ? 'active disabled'" th:if="${#strings.equals(role, 'ADMIN')} or ${#strings.equals(role, 'FULL')} ">Informacje</a>
                 </li>
                 <li class="nav-item mr-5" >
                     <a class="nav-link" href="#" th:href="@{/App/Shared}" th:classappend="${#strings.startsWith(path, 'Shared')} ? 'active disabled'">Udostępnione</a>

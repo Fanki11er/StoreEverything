@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Generated;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
@@ -25,17 +26,17 @@ public class Item {
     @Column(name = "content", length = 500, nullable = false)
     private String content;
 
-    @Column(name = "url", length = 100, nullable = true)
+    @Column(name = "url", length = 100)
     private String url;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "category", nullable = false)
     private Category category;
-
     @Column(name = "created", nullable = false)
-    private LocalDate created;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    private String created;
+
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "user", nullable = false)
     private User user;
 }

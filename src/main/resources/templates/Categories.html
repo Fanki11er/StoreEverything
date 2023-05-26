@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Categories</title>
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
-<!--    <script src="/bootstrap/js/bootstrap.min.js"></script>-->
 </head>
 <body>
 
@@ -18,15 +17,10 @@
         <table class="table table-striped ">
             <tr class="pr-1">
                 <th>Nazwa kategorii</th>
-                <th class="col-1">Akcje</th>
             </tr>
             <tr th:each="category : ${categories}" class="pr-1">
                 <td class="align-middle" th:text="${category.name}"></td>
-                <td >
-                    <form th:action="@{'/App/Categories/Delete/' + ${category.id}}" method="post" class="justify-items-end" >
-                        <button class="btn btn-danger" type="submit">Usuń</button>
-                    </form>
-                </td>
+
             </tr>
         </table>
     </div>

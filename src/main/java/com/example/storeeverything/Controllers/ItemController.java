@@ -1,10 +1,9 @@
 package com.example.storeeverything.Controllers;
-
-import com.example.storeeverything.Entities.Category;
+import com.example.storeeverything.Dtos.ItemDto;
 import com.example.storeeverything.Entities.Item;
-import com.example.storeeverything.Entities.User;
 import com.example.storeeverything.Services.CategoryService;
 import com.example.storeeverything.Services.ItemService;
+import com.example.storeeverything.Services.UserServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/Items")
+@RequestMapping("/App/Items")
 public class ItemController {
     @Autowired
     ItemService itemService;
@@ -23,32 +22,44 @@ public class ItemController {
     @Autowired
     CategoryService categoryService;
 
+    @Autowired
+    UserServiceImpl userService;
+
     @GetMapping("")
     public String Items(Model model) {
+        String loggedUserRole = userService.getLoggedUserRole();
         List<Item> items = itemService.getAllItems();
         model.addAttribute("items", items);
+        model.addAttribute("path", "Information");
+        model.addAttribute("loggedUserRole", loggedUserRole);
         return "Items";
     }
 
     @GetMapping("/New")
     public String createItem(Model model) {
-        model.addAttribute("item", new Item());
+        String loggedUserRole = userService.getLoggedUserRole();
+        model.addAttribute("item", new ItemDto());
         model.addAttribute("categories", categoryService.getAllCategories());
+        model.addAttribute("path", "Information");
+        model.addAttribute("loggedUserRole", loggedUserRole);
         return "AddItemForm";
     }
 
-    @PostMapping("/Save")
-    public String saveItem(@Valid @ModelAttribute("item") Item item, BindingResult bindingResult) {
+    @PostMapping("/New/Save")
+    public String saveItem(@Valid @ModelAttribute("item") ItemDto itemDto, BindingResult bindingResult, Model model) {
+        model.addAttribute("path", "Information");
+        model.addAttribute("categories", categoryService.getAllCategories());
         if (bindingResult.hasErrors()) {
             return "AddItemForm";
         }
-        itemService.addNewItem(item);
-        return "redirect:/Items";
+        itemService.addNewItem(itemDto);
+        return "redirect:/App/Items";
     }
 
     @PostMapping("/Delete/{id}")
-    public String deleteItem(@PathVariable("id") Long id) {
+    public String deleteItem(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("path", "Information");
         itemService.deleteItem(id);
-        return "redirect:/Items";
+        return "redirect:/App/Items";
     }
 }

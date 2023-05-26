@@ -49,11 +49,4 @@ public class CategoryController {
         categoryService.addNewCategory(category);
         return "redirect:/App/Categories";
     }
-
-    @PostMapping  ("/Delete/{id}")
-    public String deleteCategory(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("path", "Categories");
-        categoryService.deleteCategory(id);
-        return "redirect:/App/Categories";
-    }
 }
