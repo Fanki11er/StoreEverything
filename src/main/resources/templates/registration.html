@@ -11,17 +11,17 @@
 
 <div th:replace="mainNavbar.html :: mainNavbar(path=${path})"></div>
 <div class="container col-sm-8 col-md-6 col-lg-4">
-    <h1 class="my-4">Registration</h1>
+    <h1 class="my-4">Rejestracja</h1>
     <form th:action="@{/Auth/Register/Reg}" th:object="${user}" method="post" novalidate>
         <div class="mb-3">
-            <label for="firstName" class="form-label">First name</label>
+            <label for="firstName" class="form-label">Imię</label>
             <input type="text" class="form-control" id="firstName" th:field="*{firstName}"
                    th:classappend="${#fields.hasErrors('firstName')} ? 'is-invalid': ''">
             <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"
                   class="invalid-feedback d-block"></span>
         </div>
         <div class="mb-3">
-            <label for="surname" class="form-label">Surname</label>
+            <label for="surname" class="form-label">Nazwisko</label>
             <input type="text" class="form-control" id="surname" th:field="*{surname}"
                    th:classappend="${#fields.hasErrors('surname')} ? 'is-invalid': ''">
             <span th:if="${#fields.hasErrors('surname')}" th:errors="*{firstName}"
@@ -35,20 +35,20 @@
                   class="invalid-feedback d-block"></span>
         </div>
         <div class="mb-2">
-            <label for="password" class="form-label">Password</label>
+            <label for="password" class="form-label">Hasło</label>
             <input type="password" class="form-control" id="password" th:field="*{password}"
                    th:classappend="${#fields.hasErrors('password')} ? 'is-invalid': ''">
             <span th:if="${#fields.hasErrors('password')}" th:errors="*{firstName}"
                   class="invalid-feedback d-block"></span>
         </div>
         <div class="mb-2">
-            <label for="age" class="form-label">Age</label>
+            <label for="age" class="form-label">Wiek</label>
             <input type="number" class="form-control" id="age" th:field="*{age}"
                    th:classappend="${#fields.hasErrors('age')} ? 'is-invalid': ''">
             <span th:if="${#fields.hasErrors('age')}" th:errors="*{firstName}" class="invalid-feedback d-block"></span>
         </div>
         <div class="mb-2">
-            <button type="submit" class="btn btn-primary mt-3">Register</button>
+            <button type="submit" class="btn btn-primary mt-3">Zarejestruj</button>
         </div>
     </form>
 </div>

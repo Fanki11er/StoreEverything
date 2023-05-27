@@ -47,8 +47,10 @@ public class ItemController {
 
     @PostMapping("/New/Save")
     public String saveItem(@Valid @ModelAttribute("item") ItemDto itemDto, BindingResult bindingResult, Model model) {
+        String loggedUserRole = userService.getLoggedUserRole();
         model.addAttribute("path", "Information");
         model.addAttribute("categories", categoryService.getAllCategories());
+        model.addAttribute("loggedUserRole", loggedUserRole);
         if (bindingResult.hasErrors()) {
             return "AddItemForm";
         }
@@ -61,5 +63,45 @@ public class ItemController {
         model.addAttribute("path", "Information");
         itemService.deleteItem(id);
         return "redirect:/App/Items";
+    }
+
+    @GetMapping("/{id}")
+    public String itemDetails(@PathVariable("id") Long id, Model model) {
+        String loggedUserRole = userService.getLoggedUserRole();
+        Item item = itemService.getItemById(id);
+        model.addAttribute("item", item);
+        model.addAttribute("path", "Information");
+        model.addAttribute("loggedUserRole", loggedUserRole);
+        return "itemDetails";
+    }
+
+    @GetMapping("/Edit/{id}")
+    public String editItemForm(@PathVariable("id") Long id, Model model) {
+        String loggedUserRole = userService.getLoggedUserRole();
+        Item item = itemService.getItemById(id);
+        model.addAttribute("item", item);
+        model.addAttribute("newItem", item);
+        model.addAttribute("categories", categoryService.getAllCategories());
+        model.addAttribute("path", "Information");
+        model.addAttribute("loggedUserRole", loggedUserRole);
+        return "editItemForm";
+    }
+
+
+
+    @PostMapping("/Edit/doEdit/{id}")
+    public String editItem(@PathVariable("id") Long id, @Valid @ModelAttribute("newItem") ItemDto newItem, BindingResult bindingResult, Model model) {
+        Item item = itemService.getItemById(id);
+        String loggedUserRole = userService.getLoggedUserRole();
+        model.addAttribute("path", "Information");
+        model.addAttribute("item", item);
+        model.addAttribute("newItem", item);
+        model.addAttribute("categories", categoryService.getAllCategories());
+        model.addAttribute("loggedUserRole", loggedUserRole);
+        if (bindingResult.hasErrors()) {
+            return "redirect:/App/Items/Edit/{id}?error";
+        }
+        itemService.updateItem(id, newItem);
+        return "redirect:/App/Items/" + id;
     }
 }

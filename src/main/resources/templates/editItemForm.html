@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark">
 <head>
     <meta charset="UTF-8">
-    <title>Dodaj informację</title>
+    <title>Edytuj informację</title>
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
 
 </head>
@@ -11,15 +11,18 @@
 <div th:replace="appNavbar.html :: appNavbar(path=${path}, role=${loggedUserRole})"></div>
 
 <div class="container col-sm-8 col-md-6 col-lg-4">
-    <h1 class="my-4">Dodaj Informację</h1>
+    <h1 class="my-4">Edytuj Informację</h1>
 
-    <form action="#" th:action="@{/App/Items/New/Save}" th:object="${item}" method="post">
+    <form action="#" th:action="@{'/App/Items/Edit/doEdit/'+ ${item.getId()}}" th:object="${newItem}" method="post">
+        <div th:if="${param.error}">
+            <div class="alert alert-danger">Wprowadź poprawne dane</div>
+        </div>
 
         <div class="m-2">
             <label class="form-label bg-dark text-light" for="category">Kategoria</label>
-            <select class="form-control" id="category" name="category" th:classappend="${#fields.hasErrors('category')} ? 'is-invalid': ''">
-                <option value="">-- Wybierz kategorię --</option>
-                <option th:each="category : ${categories}" th:value="${category.getId()}"
+            <select class="form-control" id="category" name="category">
+                <option  th:value="${item.getCategory().getId()}" selected th:text="${item.getCategory().name}"></option>
+                <option th:if="${item.getCategory().getName() != category.getName()}" th:each="category : ${categories}" th:value="${category.getId()}"
                         th:text="${category.name}"></option>
             </select>
             <span class="invalid-feedback d-block" th:if="${#fields.hasErrors('category')}"
@@ -27,30 +30,33 @@
         </div>
         <div class="m-2">
             <label class="form-label bg-dark text-light" for="title">Tytuł</label>
-            <input class="form-control" type="text" id="title" th:field="*{title}" th:classappend="${#fields.hasErrors('title')} ? 'is-invalid': ''"/>
+            <input class="form-control" type="text" id="title" th th:value="${item.getTitle()}" th:name="title"/>
             <span class="invalid-feedback d-block" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
         </div>
 
 
         <div class="m-2">
             <label class="form-label bg-dark text-light" for="url">Url</label>
-            <input class="form-control" type="text" id="url" th:field="*{url}" th:classappend="${#fields.hasErrors('url')} ? 'is-invalid': ''"/>
+            <input class="form-control" type="text" id="url" th:value="${item.getUrl()}" th:name="url"/>
             <span class="invalid-feedback d-block" th:if="${#fields.hasErrors('url')}" th:errors="*{url}"></span>
         </div>
 
         <div class="m-2">
             <label class="form-label bg-dark text-light" for="content">Treść</label>
-            <textarea rows="4" re class="form-control" type="text" id="content" th:field="*{content}"
-                      th:classappend="${#fields.hasErrors('content')} ? 'is-invalid': ''"/>
+            <textarea rows="4"  class="form-control"  id="content"
+                      th:field="*{content}"
+            ></textarea>
             <span class="invalid-feedback d-block" th:if="${#fields.hasErrors('content')}"
                   th:errors="*{content}"></span>
         </div>
 
         <p class="my-4 d-flex container w-100 justify-content-around">
-            <input class="btn btn-success" type="submit" value="Dodaj"/>
-            <a class="btn btn-primary col-auto d-inline-block" href="#" th:href="@{/App/Items}" th:text="Anuluj"></a>
+            <input class="btn btn-warning col-auto" type="submit" value="Edytuj"/>
+            <a class="btn btn-primary col-auto d-inline-block" href="#" th:href="@{'/App/Items/' + ${item.id}}" th:text="Anuluj"></a>
         </p>
+
     </form>
+
 </div>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"

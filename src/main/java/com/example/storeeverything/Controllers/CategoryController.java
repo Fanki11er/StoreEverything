@@ -42,7 +42,9 @@ public class CategoryController {
 
     @PostMapping("/New/Save")
     public String saveCategory(@Valid @ModelAttribute("category") Category category, BindingResult bindingResult, Model model) {
+        String loggedUserRole = userService.getLoggedUserRole();
         model.addAttribute("path", "Categories");
+        model.addAttribute("loggedUserRole", loggedUserRole);
         if (bindingResult.hasErrors()) {
             return "AddCategoryForm";
         }

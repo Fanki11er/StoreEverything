@@ -18,8 +18,11 @@
             <input class="form-control" type="text" id="name" th:field="*{name}" th:classappend="${#fields.hasErrors('name')} ? 'is-invalid': ''">
         <span  class="invalid-feedback d-block" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
         </div>
+            <p class="my-4 d-flex container w-100 justify-content-around">
+                <input class="btn btn-primary" type="submit" value="Dodaj"/>
+                <a class="btn btn-primary col-auto d-inline-block" href="#" th:href="@{/App/Items}" th:text="Anuluj"></a>
+            </p>
 
-            <input class="btn btn-primary m-lg-2" type="submit" value="Dodaj"/>
     </form>
 </div>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

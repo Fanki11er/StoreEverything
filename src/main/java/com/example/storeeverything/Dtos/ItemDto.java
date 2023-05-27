@@ -1,6 +1,7 @@
 package com.example.storeeverything.Dtos;
 
 import com.example.storeeverything.Entities.Category;
+import com.example.storeeverything.Entities.Item;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.*;
