@@ -40,7 +40,6 @@ public class UserServiceImpl implements UserDetailsService {
         ArrayList<UserDto> users = new ArrayList<>();
 
         for(int i=0; i < all.size(); i++){
-            System.out.println(all.get(i).getLogin() + " " + auth.getUsername());
             if(!all.get(i).getLogin().equals(auth.getUsername())){
                 users.add(new UserDto(all.get(i)));
             }

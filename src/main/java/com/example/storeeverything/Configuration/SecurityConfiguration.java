@@ -1,6 +1,5 @@
 package com.example.storeeverything.Configuration;
 
-import com.example.storeeverything.Services.UserService;
 import com.example.storeeverything.Services.UserServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +25,7 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws  Exception{
         http.authorizeHttpRequests().requestMatchers(
+                "/",
                 "/Auth/**",
                 "/js/**",
                 "/css/**",
