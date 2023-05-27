@@ -12,8 +12,10 @@
 <div th:replace="appNavbar.html :: appNavbar(path=${path}, role=${loggedUserRole})"></div>
 
 <div class="container col-sm-8 col-md-6 col-lg-4">
+  <div class="alert alert-success" role="alert" th:if="${param.success}">Rola została zmieniona
+  </div>
   <div class="card">
-    <div class="card-header fw-bold fs-3 p-4 text-center" th:text="'Użytkownik '+ ${user.getLogin()}"></div>
+    <div class="card-header fw-bold fs-3 p-4 text-center" th:text="'Użytkownik: '+ ${user.getLogin()}"></div>
     <div class="card-body px-4 fs-5">
 
       <div class="row">
@@ -25,26 +27,23 @@
         <span class="card-text col" th:text="${user.getSurname()}"></span>
       </div>
       <div class="row">
-        <span class="card-title fw-bold col-auto" >Wiek::</span>
+        <span class="card-title fw-bold col-auto" >Wiek:</span>
         <span class="card-text col" th:text="${user.getAge()}"></span>
       </div>
-<!--      <div class="row">-->
-<!--        <span class="card-title fw-bold col-auto" >Rola:</span>-->
-<!--        <span class="card-text col" th:text="${user.getRole()}"></span>-->
-<!--      </div>-->
-      <form th:action="@{'/App/Admin/User/Edit?id=' + ${user.getId()}}" th:object="${newRole}" method="post" novalidate>
+
+      <form th:action="@{'/App/Admin/User/Edit/' + ${user.getId()}}" th:object="${newRole}" method="post" novalidate>
         <div class="mb-3">
-<!--          <label for="role" class="form-label">Rola użytkownika</label>-->
+          <label for="newRole" class="form-label">Rola użytkownika:</label>
           <select  class="form-select" aria-label="Default select example" id="newRole" name="newRole">
             <option selected th:value="${user.getRole()}" th:text="${user.getRole()}"></option>
             <option th:each="role: ${roles}" th:value="${role}" th:text="${role}" ></option>
           </select>
-<!--          <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"-->
-<!--                class="invalid-feedback d-block"></span>-->
+
         </div>
-          <div class="row my-3 justify-content-center">
-              <button type="submit" class=" btn btn-primary ">Zapisz zmiany</button>
-          </div>
+          <p class="container w-100 justify-content-around d-flex">
+              <button type="submit" class=" btn btn-warning">Zapisz zmiany</button>
+            <a class="btn btn-primary col-auto d-line-block" th:text="Wróć" th:href="@{/App/Admin/}"></a>
+          </p>
       </form>
 
 
