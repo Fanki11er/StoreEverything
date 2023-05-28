@@ -28,7 +28,7 @@ public class ItemController {
     @GetMapping("")
     public String Items(Model model) {
         String loggedUserRole = userService.getLoggedUserRole();
-        List<Item> items = itemService.getAllItems();
+        List<Item> items = itemService.getAllLoggedUserItems();
         model.addAttribute("items", items);
         model.addAttribute("path", "Information");
         model.addAttribute("loggedUserRole", loggedUserRole);

@@ -27,6 +27,11 @@ public class ItemService {
 
     public List<Item> getAllItems(){return  itemRepository.findAll();}
 
+    public List<Item> getAllLoggedUserItems(){
+        Long id = userService.getLoggedUserId();
+        return itemRepository.findAllByUserId(id);
+    }
+
     public void addNewItem(ItemDto itemDto){
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         Item item = new Item();

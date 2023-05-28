@@ -37,5 +37,10 @@ public class UserServiceImpl implements UserDetailsService {
         User user = userRepository.findByLogin(auth.getUsername()).orElseThrow(() -> new UsernameNotFoundException("Nie znaleziono użytkownika"));
         return user;
     }
+
+    public Long getLoggedUserId(){
+        User user = getLoggedUserEntity();
+        return user.getId();
+    }
 }
 
