@@ -17,7 +17,7 @@ public class AdminController {
 
     @GetMapping("/User")
     public  String getUserInfo(@RequestParam Long id, Model model){
-        UserDto user = userService.loadLUserById(id);
+        UserDto user = userService.loadUserById(id);
         String loggedUserRole = userService.getLoggedUserRole();
         model.addAttribute("user", user);
         model.addAttribute("path", "User");

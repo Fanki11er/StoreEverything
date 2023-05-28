@@ -26,6 +26,7 @@ public class SecurityUserDto implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         ArrayList<SimpleGrantedAuthority> userRoles = new ArrayList<>();
+        userRoles.add(new SimpleGrantedAuthority(user.getRole().name()));
       return  userRoles;
     }
 

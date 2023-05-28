@@ -1,5 +1,7 @@
 package com.example.storeeverything.Controllers;
 import com.example.storeeverything.Dtos.ItemDto;
+import com.example.storeeverything.Dtos.UserDto;
+import com.example.storeeverything.Dtos.ShareItemDto;
 import com.example.storeeverything.Entities.Item;
 import com.example.storeeverything.Services.CategoryService;
 import com.example.storeeverything.Services.ItemService;
@@ -103,5 +105,17 @@ public class ItemController {
         }
         itemService.updateItem(id, newItem);
         return "redirect:/App/Items/" + id;
+    }
+
+    @GetMapping("/Share/{id}")
+    public String shareItem(@PathVariable("id") Long id, Model model) {
+        String loggedUserRole = userService.getLoggedUserRole();
+        List<UserDto> users = userService.loadUsers();
+        model.addAttribute("path", "Information");
+        model.addAttribute("loggedUserRole", loggedUserRole);
+        model.addAttribute("users", users);
+        model.addAttribute("sharedItem", new ShareItemDto());
+        model.addAttribute("itemId", id);
+        return "share";
     }
 }

@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark">
 <head>
     <meta charset="UTF-8">
-    <title>Szczegóły</title>
+    <title>Szczegóły informacji</title>
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
 
 </head>
@@ -10,9 +10,6 @@
 <div th:replace="appNavbar.html :: appNavbar(path=${path}, role=${loggedUserRole})"></div>
 <div class="container col-sm-8 col-md-6 col-lg-4">
 
-    <div th:if="${param.success}">
-        <div class="alert alert-success">Udostępniono informację</div>
-    </div>
     <h1 class="my-4 mx-2">Szczegóły informacji</h1>
 
     <div class="card">
@@ -21,24 +18,14 @@
             <h5 class="card-title mb-4" th:text="'Kategoria: ' +  ${item.category.getName()}"></h5>
             <p class="card-text" th:text="'Autor: ' + ${item.getUser().firstName} + ' ' + ${item.getUser().getSurname()}"></p>
             <p class="card-text" th:text="'Utworzono: ' + ${item.getCreated()}"></p>
-           <p>
-               <a th:if="${#strings.length(item.getUrl()) > 0}" th:href="${item.getUrl()}" href="#" class="card-link" th:text="${item.getUrl()}"></a>
-           </p>
+            <p>
+                <a th:if="${#strings.length(item.getUrl()) > 0}" th:href="${item.getUrl()}" href="#" class="card-link" th:text="${item.getUrl()}"></a>
+            </p>
             <p class="card-text border border-secondary rounded p-3" th:text="${item.content}"></p>
 
-            <div class="container d-flex justify-content-around w100">
-                <a class="btn btn-info col-auto d-block"  href="#" th:href="@{'/App/Items/Share/' + ${item.id}}" th:text="Udostępnij"></a>
-                <a class="btn btn-warning col-auto" href="#" th:href="@{'/App/Items/Edit/' + ${item.id}}" th:text="Edycja"></a>
-                <form th:action="@{'/App/Items/Delete/' + ${item.id}}" method="post" class="col-auto">
-                    <input type="hidden" name="_method" value="DELETE"/>
-                    <button class="btn btn-danger" type="submit">Usuń</button>
-                </form>
-
-
-            </div>
         </div>
     </div>
-    <a class="btn btn-primary col-auto d-inline-block mt-5"  href="#" th:href="@{/App/Items}" th:text="Powrót"></a>
+    <a class="btn btn-primary col-auto d-inline-block mt-5"  href="#" th:href="@{/App/Shared/Items/IN}" th:text="Powrót"></a>
 
 </div>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

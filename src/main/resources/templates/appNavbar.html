@@ -6,14 +6,12 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item mr-5" >
-                    <a class="nav-link" href="#" th:href="@{/App/User}"  th:classappend="${#strings.startsWith(path, 'User')} ? 'active disabled'">Użytkownik</a>
-                </li>
+
                 <li class="nav-item mr-5" >
                     <a class="nav-link" href="#" th:href="@{/App/Items}" th:classappend="${#strings.startsWith(path, 'Information')} ? 'active disabled'" th:if="${#strings.equals(role, 'ADMIN')} or ${#strings.equals(role, 'FULL')} ">Informacje</a>
                 </li>
                 <li class="nav-item mr-5" >
-                    <a class="nav-link" href="#" th:href="@{/App/Shared}" th:classappend="${#strings.startsWith(path, 'Shared')} ? 'active disabled'">Udostępnione</a>
+                    <a class="nav-link" href="#" th:href="@{/App/Shared/Items/IN}" th:classappend="${#strings.startsWith(path, 'Shared')} ? 'active disabled'">Udostępnione</a>
                 </li>
                 <li class="nav-item mr-5"  th:if="${#strings.equals(role, 'ADMIN')} or ${#strings.equals(role, 'FULL')} ">
                     <a class="nav-link" href="#" th:href="@{/App/Categories}" th:classappend="${#strings.startsWith(path, 'Categories')} ? 'active disabled'">Kategorie</a>
