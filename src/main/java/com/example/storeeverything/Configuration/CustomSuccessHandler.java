@@ -1,12 +1,10 @@
 package com.example.storeeverything.Configuration;
 
-import com.example.storeeverything.Dtos.SecurityUserDto;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
@@ -23,15 +21,17 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
 
         String redirectUrl = null;
 
-        SecurityUserDto auth = (SecurityUserDto) authentication.getPrincipal();
+        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+        for (GrantedAuthority grantedAuthority : authorities) {
 
-            System.out.println("role " + auth.getRole());
-            if (auth.getRole().equals("ADMIN") || auth.getRole().equals("FULL")) {
+            if (grantedAuthority.getAuthority() == "ADMIN" || grantedAuthority.getAuthority() == "FULL") {
                 redirectUrl = "/App/Items";
+                break;
             } else  {
                 redirectUrl = "/App/Shared/Items/IN";
+                break;
             }
-
+        }
         if (redirectUrl == null) {
             throw new IllegalStateException();
         }

@@ -31,7 +31,7 @@ public class SecurityConfiguration {
                 "/js/**",
                 "/css/**",
                 "/img/**"
-        ).permitAll().requestMatchers("/App/Items**").hasAnyAuthority("FULL, ADMIN")
+        ).permitAll().requestMatchers("/App/Items**").hasAnyAuthority("FULL", "ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
