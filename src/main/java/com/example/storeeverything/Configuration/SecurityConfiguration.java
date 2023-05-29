@@ -28,10 +28,11 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws  Exception{
         http.authorizeHttpRequests().requestMatchers(
                 "/Auth/**",
+                "/",
                 "/js/**",
                 "/css/**",
                 "/img/**"
-        ).permitAll().requestMatchers("/App/Items**").hasAnyAuthority("FULL", "ADMIN")
+        ).permitAll().requestMatchers("/SharedLinks/**").anonymous().requestMatchers("/App/Items**").hasAnyAuthority("FULL", "ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

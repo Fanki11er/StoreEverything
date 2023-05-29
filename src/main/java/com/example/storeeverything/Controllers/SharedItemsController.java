@@ -1,8 +1,10 @@
 package com.example.storeeverything.Controllers;
 
+import com.example.storeeverything.Dtos.LinkedItemDto;
 import com.example.storeeverything.Dtos.ShareItemDto;
 import com.example.storeeverything.Entities.Item;
 import com.example.storeeverything.Entities.SharedItem;
+import com.example.storeeverything.Services.LinkedItemsService;
 import com.example.storeeverything.Services.SharedItemsService;
 import com.example.storeeverything.Services.UserServiceImpl;
 import jakarta.validation.Valid;
@@ -22,6 +24,8 @@ public class SharedItemsController {
     SharedItemsService sharedItemsService;
     @Autowired
     UserServiceImpl userService;
+    @Autowired
+    private LinkedItemsService linkedItemsService;
 
 
     @GetMapping("/Items/IN")
@@ -55,5 +59,18 @@ public class SharedItemsController {
         model.addAttribute("path", "Shared");
         model.addAttribute("loggedUserRole", loggedUserRole);
         return "sharedInItemDetails";
+    }
+
+    @PostMapping("/Items/OUT/Share")
+    public String shareItem(@ModelAttribute("sharedItem") LinkedItemDto linkedItem, Model model){
+
+        String loggedUserRole = userService.getLoggedUserRole();
+        model.addAttribute("path", "Information");
+        model.addAttribute("loggedUserRole", loggedUserRole);
+        linkedItemsService.addLinkedItem(linkedItem);
+
+        return "redirect:/App/Items/Share/" + linkedItem.getItemId();
+
+
     }
 }

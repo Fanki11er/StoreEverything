@@ -1,10 +1,12 @@
 package com.example.storeeverything.Controllers;
 import com.example.storeeverything.Dtos.ItemDto;
+import com.example.storeeverything.Dtos.LinkedItemDto;
 import com.example.storeeverything.Dtos.UserDto;
 import com.example.storeeverything.Dtos.ShareItemDto;
 import com.example.storeeverything.Entities.Item;
 import com.example.storeeverything.Services.CategoryService;
 import com.example.storeeverything.Services.ItemService;
+import com.example.storeeverything.Services.LinkedItemsService;
 import com.example.storeeverything.Services.UserServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +21,16 @@ import java.util.List;
 @RequestMapping("/App/Items")
 public class ItemController {
     @Autowired
-    ItemService itemService;
+    private ItemService itemService;
 
     @Autowired
-    CategoryService categoryService;
+    private CategoryService categoryService;
 
     @Autowired
-    UserServiceImpl userService;
+    private UserServiceImpl userService;
+
+    @Autowired
+    private LinkedItemsService linkedItemsService;
 
     @GetMapping("")
     public String Items(Model model) {
@@ -111,10 +116,13 @@ public class ItemController {
     public String shareItem(@PathVariable("id") Long id, Model model) {
         String loggedUserRole = userService.getLoggedUserRole();
         List<UserDto> users = userService.loadUsers();
+        String link = linkedItemsService.checkIfLinkedItemExists(id);
         model.addAttribute("path", "Information");
         model.addAttribute("loggedUserRole", loggedUserRole);
         model.addAttribute("users", users);
         model.addAttribute("sharedItem", new ShareItemDto());
+        model.addAttribute("linkedItem", new LinkedItemDto());
+        model.addAttribute("link", link);
         model.addAttribute("itemId", id);
         return "share";
     }
