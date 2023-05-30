@@ -19,7 +19,7 @@ public class AdminController {
   @Autowired
   UserServiceImpl userService;
 
-  @GetMapping("/User")
+  @GetMapping("")
   public String getUsers(Model model) {
     String loggedUserRole = userService.getLoggedUserRole();
     ArrayList<UserDto> users = userService.getUsers();
