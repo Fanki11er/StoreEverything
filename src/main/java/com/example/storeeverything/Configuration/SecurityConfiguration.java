@@ -20,21 +20,23 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableMethodSecurity
 public class SecurityConfiguration {
 
+
     @Autowired
-    private UserServiceImpl userService;
+    private CustomSuccessHandler successHandler;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws  Exception{
         http.authorizeHttpRequests().requestMatchers(
                 "/Auth/**",
+                "/",
                 "/js/**",
                 "/css/**",
                 "/img/**"
-        ).permitAll()
+        ).permitAll().requestMatchers("/SharedLinks/**").anonymous().requestMatchers("/App/Items**").hasAnyAuthority("FULL", "ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/Auth/Login").usernameParameter("login").defaultSuccessUrl("/App/Items", true)
+                .loginPage("/Auth/Login").usernameParameter("login").successHandler(successHandler)
                 .permitAll()
                 .and()
                 .logout()

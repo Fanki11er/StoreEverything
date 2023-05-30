@@ -4,8 +4,10 @@ import com.example.storeeverything.Dtos.ItemDto;
 import com.example.storeeverything.Dtos.SecurityUserDto;
 import com.example.storeeverything.Entities.Category;
 import com.example.storeeverything.Entities.Item;
+import com.example.storeeverything.Entities.SharedItem;
 import com.example.storeeverything.Repositories.CategoryRepository;
 import com.example.storeeverything.Repositories.ItemRepository;
+import com.example.storeeverything.Repositories.SharedItemsRepository;
 import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
@@ -24,8 +26,10 @@ public class ItemService {
     ItemRepository itemRepository;
     @Autowired
     UserServiceImpl userService;
+    @Autowired
+    SharedItemsRepository sharedItemsRepository;
 
-    public List<Item> getAllItems(){return  itemRepository.findAll();}
+    //public List<Item> getAllItems(){return  itemRepository.findAll();}
 
     public List<Item> getAllLoggedUserItems(){
         Long id = userService.getLoggedUserId();
