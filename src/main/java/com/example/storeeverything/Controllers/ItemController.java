@@ -8,6 +8,15 @@ import com.example.storeeverything.Services.CategoryService;
 import com.example.storeeverything.Services.ItemService;
 import com.example.storeeverything.Services.LinkedItemsService;
 import com.example.storeeverything.Services.UserServiceImpl;
+import com.example.storeeverything.Utils.Sort;
+import com.example.storeeverything.Utils.SortBy;
+import com.example.storeeverything.Utils.SortCookie;
+import com.example.storeeverything.Utils.SortOrder;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +24,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.List;
 
 @Controller
@@ -33,13 +45,48 @@ public class ItemController {
     private LinkedItemsService linkedItemsService;
 
     @GetMapping("")
-    public String Items(Model model) {
+    public String Items(Model model, HttpServletRequest request) throws JsonProcessingException, UnsupportedEncodingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        Long userId =  userService.getLoggedUserId();
+        SortCookie sortCookie = new SortCookie();
+        Sort sort = new Sort();
+        Cookie[] cookies = request.getCookies();
+        if(cookies != null){
+            String cookieName = "SE-USER-" + userId;
+            for(int i = 0; i< cookies.length; i++){
+
+                if(cookies[i].getName().equals( cookieName) ){
+                   String cookieValue = URLDecoder.decode(cookies[i].getValue(), "UTF-8");
+                    sortCookie = objectMapper.readValue(cookieValue, SortCookie.class);
+                    break;
+                }
+            }
+        }
+
         String loggedUserRole = userService.getLoggedUserRole();
         List<Item> items = itemService.getAllLoggedUserItems();
+        sort.sortList(items, sortCookie.getSortBy(), sortCookie.getSortOrder());
         model.addAttribute("items", items);
         model.addAttribute("path", "Information");
         model.addAttribute("loggedUserRole", loggedUserRole);
+        model.addAttribute("sort", sortCookie);
+        model.addAttribute("sortBy", SortBy.values());
+        model.addAttribute("orderBy", SortOrder.values());
         return "Items";
+    }
+
+    @PostMapping("/Sort")
+    public String sortItems( @ModelAttribute("sortCookie") SortCookie sortCookie, Model model, HttpServletResponse response) throws JsonProcessingException, UnsupportedEncodingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        Long userId = userService.getLoggedUserId();
+        String loggedUserRole = userService.getLoggedUserRole();
+        model.addAttribute("path", "Information");
+        model.addAttribute("loggedUserRole", loggedUserRole);
+        String value = objectMapper.writeValueAsString(sortCookie);
+        value = URLEncoder.encode(value, "UTF-8");
+        Cookie cookie = new Cookie("SE-USER-" + userId, value);
+        response.addCookie(cookie);
+        return "redirect:/App/Items";
     }
 
     @GetMapping("/New")

@@ -12,6 +12,21 @@
     <h1 class="my-4 mx-2 text-center">Informacje</h1>
 
     <a class="btn btn-success my-4 mx-2" th:href="${'/App/Items/New'}">Dodaj nową informację</a>
+    <form action="#" th:action="@{/App/Items/Sort}" th:object="${sort}" method="post">
+        <label class="form-label bg-dark text-light" for="sortBy">Sortuj</label>
+        <select class="form-control" id="sortBY" name="sortBy" >
+            <option selected th:value="${sort.getSortBy().name()}" th:text="${sort.getSortBy().name()}"></option>
+            <option th:if="${not #strings.equals(sort.getSortBy().name(), by)}" th:each="by : ${sortBy}" th:value="${by}"
+                    th:text="${by}"></option>
+        </select>
+        <label class="form-label bg-dark text-light" for="sortBy">Kierunek</label>
+        <select class="form-control" id="sortOrder" name="sortOrder" >
+            <option selected th:value="${sort.getSortOrder().name()}" th:text="${sort.getSortOrder().name()}"></option>
+            <option th:if="${not #strings.equals(sort.getSortOrder().name(), by)}" th:each="by : ${orderBy}" th:value="${by}"
+                    th:text="${by}"></option>
+        </select>
+        <input class="btn btn-success" type="submit" value="Sortuj"/>
+    </form>
 
     <div th:if="${not #lists.isEmpty(items)}" >
         <table class="table table-striped mx-2 col-auto ">
