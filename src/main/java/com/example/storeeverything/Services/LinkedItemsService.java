@@ -28,7 +28,10 @@ public class LinkedItemsService {
     }
 
     public Item getLinkedItem(Long id){
-        LinkedItem linkedItem = linkedItemRepository.findById(id).orElseThrow(()-> new NoSuchElementException("Nie znaleziono elementu"));
+        LinkedItem linkedItem = linkedItemRepository.findById(id).orElse(null);
+        if(linkedItem == null){
+            return  null;
+        }
         return  linkedItem.getSource();
     }
 

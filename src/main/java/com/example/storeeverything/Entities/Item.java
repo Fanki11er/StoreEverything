@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Data
@@ -39,4 +40,11 @@ public class Item {
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "user", nullable = false)
     private User user;
+
+    @OneToMany(mappedBy = "source", orphanRemoval = true)
+    private List<SharedItem> sharedItems;
+
+    @OneToOne(fetch = FetchType.EAGER,  cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @JoinColumn(name = "source")
+    private LinkedItem linkedItem;
 }

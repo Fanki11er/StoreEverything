@@ -24,9 +24,9 @@ public class LinkedItemsController {
     public String itemDetails(@PathVariable("id") Long id, Model model) {
 
         Item item = linkedItemsService.getLinkedItem(id);
-//        if(item == null){
-//            return "redirect:/errror";
-//        }
+        if(item == null){
+            return "404";
+        }
         model.addAttribute("item", item);
         model.addAttribute("path", "");
 

@@ -16,7 +16,7 @@ public class LinkedItem {
     @Column(name = "id", nullable = false)
     private long id;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "source", nullable = false)
+    @OneToOne(fetch = FetchType.EAGER, optional = false,  cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "linkedItem", nullable = false)
     private Item source;
 }
