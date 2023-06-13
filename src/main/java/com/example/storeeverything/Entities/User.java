@@ -15,12 +15,12 @@ import java.util.List;
 @Table(name = "User", uniqueConstraints = @UniqueConstraint(columnNames = "login"))
 public class User {
 
-    public User(String firstName, String surname, String login, String password, Integer age, Role role) {
+    public User(String firstName, String surname, String login, String password, String email, Role role) {
         this.firstName = firstName;
         this.surname = surname;
         this.login = login;
         this.password = password;
-        this.age = age;
+        this.email = email;
         this.role = role;
     }
     @Id
@@ -36,8 +36,8 @@ public class User {
     private String login;
     @Column(name = "password",  length = 128, nullable = false)
     private String password;
-    @Column(name = "age",  length = 3, nullable = false)
-    private Integer age;
+    @Column(name = "email",  length = 50, nullable = false)
+    private String email;
     @Column(name = "role",  length = 10, nullable = false)
     private Role role;
     @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)

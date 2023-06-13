@@ -19,7 +19,7 @@ public class UserRegisterService {
                 registrationDto.getSurname(),
                 registrationDto.getLogin(),
                 passwordEncoder.encode(registrationDto.getPassword()),
-                registrationDto.getAge(),
+                registrationDto.getEmail(),
                 Role.LIMITED);
         return  userRepository.save(user);
     }

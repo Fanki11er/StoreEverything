@@ -9,6 +9,7 @@ import com.example.storeeverything.Repositories.SharedItemsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -21,6 +22,8 @@ public class SharedItemsService {
     UserServiceImpl userService;
     @Autowired
     SharedItemsRepository sharedItemsRepository;
+    @Autowired
+    MailService mailService;
 
     public List<SharedItem> getAllLoggedUserSharedItems(){
         Long id = userService.getLoggedUserId();
@@ -34,6 +37,14 @@ public class SharedItemsService {
         sharedItem.setSource(item);
         sharedItem.setUser(user);
         sharedItemsRepository.save(sharedItem);
+        try{
+            mailService.sendEmail(user.getFirstName() + " " + user.getSurname());
+        }
+        catch (IOException ex){
+            System.out.println(ex.getMessage());
+        }
+
+
     }
 
     public Item getSourceItemById(Long id){

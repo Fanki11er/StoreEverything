@@ -30,8 +30,8 @@ public class UserDto {
         return user.getRole().name();
     }
 
-    public int getAge(){
-        return user.getAge();
+    public String getEmail(){
+        return user.getEmail();
     }
 
 }

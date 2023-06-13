@@ -1,6 +1,7 @@
 package com.example.storeeverything.Dtos;
 
 import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.*;
@@ -26,8 +27,8 @@ public class UserRegistrationDto {
     @NonNull
     @Size(min=5)
     private String password;
-    @DecimalMin("18")
+    @Email
     @NonNull
-    private Integer age;
+    private String email;
 
 }

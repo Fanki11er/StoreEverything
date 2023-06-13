@@ -42,10 +42,10 @@
                   class="invalid-feedback d-block"></span>
         </div>
         <div class="mb-2">
-            <label for="age" class="form-label">Wiek</label>
-            <input type="number" class="form-control" id="age" th:field="*{age}"
-                   th:classappend="${#fields.hasErrors('age')} ? 'is-invalid': ''">
-            <span th:if="${#fields.hasErrors('age')}" th:errors="*{firstName}" class="invalid-feedback d-block"></span>
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" th:field="*{email}"
+                   th:classappend="${#fields.hasErrors('email')} ? 'is-invalid': ''">
+            <span th:if="${#fields.hasErrors('email')}" th:errors="*{firstName}" class="invalid-feedback d-block"></span>
         </div>
         <div class="mb-2">
             <button type="submit" class="btn btn-primary mt-3">Zarejestruj</button>
