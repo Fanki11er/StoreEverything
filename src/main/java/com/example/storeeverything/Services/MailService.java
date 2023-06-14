@@ -1,6 +1,7 @@
 package com.example.storeeverything.Services;
 
 import com.sendgrid.helpers.mail.objects.Email;
+import io.github.cdimascio.dotenv.DotenvException;
 import org.springframework.stereotype.Service;
 import java.io.IOException;
 import com.sendgrid.Method;
@@ -17,9 +18,16 @@ import io.github.cdimascio.dotenv.Dotenv;
 public class MailService {
 
     public String sendEmail(String fromUser) throws IOException {
+        String SgApiKey = "";
+       try {
+           Dotenv dotenv = Dotenv.load();
+           SgApiKey = dotenv.get("SG_API_KEY");
+       }
+       catch (DotenvException e){
+           System.out.println(e.getMessage());
+       }
 
-        Dotenv dotenv = Dotenv.load();
-        String SgApiKey = dotenv.get("SG_API_KEY");
+
         Email from = new Email("dziedzic.k@hotmail.com");
         String subject = "Udostępniono Ci nową notatke";
         Email to = new Email("dziedzic.kdz@gmail.com");
@@ -27,7 +35,6 @@ public class MailService {
         Mail mail = new Mail(from, subject, to, content);
 
         SendGrid sg = new SendGrid(SgApiKey);
-        //SendGrid sg = new SendGrid("");
         Request request = new Request();
         try {
             request.setMethod(Method.POST);

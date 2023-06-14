@@ -32,13 +32,14 @@ public class SharedItemsService {
 
     public void addSharedItem(ShareItemDto dto){
         User user = userService.getUserEntityById(dto.getUserId());
+        User fromUser = userService.getLoggedUserEntity();
         Item item = itemRepository.findById(dto.getItemId()).orElseThrow(()-> new NoSuchElementException("Nie znaleziono informacji"));
         SharedItem sharedItem =new SharedItem();
         sharedItem.setSource(item);
         sharedItem.setUser(user);
         sharedItemsRepository.save(sharedItem);
         try{
-            mailService.sendEmail(user.getFirstName() + " " + user.getSurname());
+            mailService.sendEmail(fromUser.getFirstName() + " " + fromUser.getSurname());
         }
         catch (IOException ex){
             System.out.println(ex.getMessage());
