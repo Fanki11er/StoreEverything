@@ -13,19 +13,19 @@ import lombok.*;
 @Setter
 public class UserRegistrationDto {
     @NonNull
-    @Size(min=3, max = 20)
+    @Size(min=3, max = 20, message = "Minimalna długość to {min} znaki, maksymalna długość to {max} znaków")
     @Pattern( regexp = "[A-Z][a-ząęóśżźćń]*", message = "Tylko pierwsza litera może być wielka")
     private String firstName;
-    @Size(min=3, max = 50)
+    @Size(min=3, max = 50, message = "Minimalna długość to {min} znaki, maksymalna długość to {max} znaków")
     @NonNull
     @Pattern( regexp = "[A-Z][a-ząęóśżźćń]*", message = "Tylko pierwsza litera może być wielka")
     private String surname;
     @NonNull
-    @Size(min=3, max = 20)
+    @Size(min=3, max = 20, message = "Minimalna długość to {min} znaki, maksymalna długość to {max} znaków")
     @Pattern( regexp = "[a-ząęóśżźćń]*", message = "Tylko małe litery")
     private String login;
     @NonNull
-    @Size(min=5)
+    @Size(min=5, message = "Minimalna długość to {min} znaków")
     private String password;
     @Email
     @NonNull

@@ -24,28 +24,28 @@
             <label for="surname" class="form-label">Nazwisko</label>
             <input type="text" class="form-control" id="surname" th:field="*{surname}"
                    th:classappend="${#fields.hasErrors('surname')} ? 'is-invalid': ''">
-            <span th:if="${#fields.hasErrors('surname')}" th:errors="*{firstName}"
+            <span th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"
                   class="invalid-feedback d-block"></span>
         </div>
         <div class="mb-2">
             <label for="login" class="form-label">Login</label>
             <input type="text" class="form-control" id="login" th:field="*{login}"
                    th:classappend="${#fields.hasErrors('login')} ? 'is-invalid': ''">
-            <span th:if="${#fields.hasErrors('login')}" th:errors="*{firstName}"
+            <span th:if="${#fields.hasErrors('login')}" th:errors="*{login}"
                   class="invalid-feedback d-block"></span>
         </div>
         <div class="mb-2">
             <label for="password" class="form-label">Hasło</label>
             <input type="password" class="form-control" id="password" th:field="*{password}"
                    th:classappend="${#fields.hasErrors('password')} ? 'is-invalid': ''">
-            <span th:if="${#fields.hasErrors('password')}" th:errors="*{firstName}"
+            <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
                   class="invalid-feedback d-block"></span>
         </div>
         <div class="mb-2">
             <label for="email" class="form-label">Email</label>
             <input type="email" class="form-control" id="email" th:field="*{email}"
                    th:classappend="${#fields.hasErrors('email')} ? 'is-invalid': ''">
-            <span th:if="${#fields.hasErrors('email')}" th:errors="*{firstName}" class="invalid-feedback d-block"></span>
+            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="invalid-feedback d-block"></span>
         </div>
         <div class="mb-2">
             <button type="submit" class="btn btn-primary mt-3">Zarejestruj</button>
