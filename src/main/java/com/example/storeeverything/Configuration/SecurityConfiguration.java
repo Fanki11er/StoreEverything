@@ -1,6 +1,4 @@
 package com.example.storeeverything.Configuration;
-
-import com.example.storeeverything.Services.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,7 +15,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SecurityConfiguration {
 
   @Autowired
-  private CustomSuccessHandler successHandler;
+  private CustomSuccessHandler customSuccessHandler;
 
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http)
@@ -42,7 +40,7 @@ public class SecurityConfiguration {
       .formLogin()
       .loginPage("/Auth/Login")
       .usernameParameter("login")
-      .successHandler(successHandler)
+      .successHandler(customSuccessHandler)
       .permitAll()
       .and()
       .logout()
