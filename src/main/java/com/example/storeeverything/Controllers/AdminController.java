@@ -1,13 +1,10 @@
 package com.example.storeeverything.Controllers;
-
 import com.example.storeeverything.Dtos.NewRoleDto;
 import com.example.storeeverything.Dtos.UserDto;
 import com.example.storeeverything.Role;
 import com.example.storeeverything.Services.UserServiceImpl;
-import jakarta.websocket.server.PathParam;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;

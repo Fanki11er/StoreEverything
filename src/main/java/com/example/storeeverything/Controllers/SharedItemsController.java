@@ -6,7 +6,7 @@ import com.example.storeeverything.Entities.Item;
 import com.example.storeeverything.Entities.SharedItem;
 import com.example.storeeverything.Services.LinkedItemsService;
 import com.example.storeeverything.Services.SharedItemsService;
-import com.example.storeeverything.Services.UserServiceImpl;
+import com.example.storeeverything.Services.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,7 +23,7 @@ public class SharedItemsController {
     @Autowired
     SharedItemsService sharedItemsService;
     @Autowired
-    UserServiceImpl userService;
+    UserService userService;
     @Autowired
     private LinkedItemsService linkedItemsService;
 

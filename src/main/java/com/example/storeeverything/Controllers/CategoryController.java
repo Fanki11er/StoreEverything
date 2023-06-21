@@ -2,10 +2,9 @@ package com.example.storeeverything.Controllers;
 
 import com.example.storeeverything.Entities.Category;
 import com.example.storeeverything.Services.CategoryService;
-import com.example.storeeverything.Services.UserServiceImpl;
+import com.example.storeeverything.Services.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,7 +18,7 @@ public class CategoryController {
     @Autowired
     CategoryService categoryService;
     @Autowired
-    UserServiceImpl userService;
+    UserService userService;
 
     @GetMapping("")
     public String Categories(Model model) {

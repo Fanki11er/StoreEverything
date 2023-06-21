@@ -2,8 +2,6 @@ package com.example.storeeverything.Controllers;
 
 import com.example.storeeverything.Dtos.UserRegistrationDto;
 import com.example.storeeverything.Services.UserRegisterService;
-import com.example.storeeverything.Services.UserService;
-import com.example.storeeverything.Services.UserServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

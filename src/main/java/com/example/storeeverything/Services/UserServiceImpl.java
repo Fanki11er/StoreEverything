@@ -7,38 +7,28 @@ import com.example.storeeverything.Repositories.UserRepository;
 import com.example.storeeverything.Role;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserServiceImpl implements UserDetailsService {
+public class UserServiceImpl implements UserService {
 
   @Autowired
   private UserRepository userRepository;
 
-  @Override
-  public UserDetails loadUserByUsername(String username)
-    throws UsernameNotFoundException {
-    return userRepository
-      .findByLogin(username)
-      .map(SecurityUserDto::new)
-      .orElseThrow(() -> new UsernameNotFoundException("Nie prawidłowe dane"));
-  }
+
 
   public UserDto loadUserById(Long id) throws UsernameNotFoundException {
     return userRepository
       .findById(id)
       .map(UserDto::new)
       .orElseThrow(() ->
-        new UsernameNotFoundException("Nie znaleziono użytkonika")
+        new UsernameNotFoundException("Nie znaleziono użytkownika")
       );
   }
 

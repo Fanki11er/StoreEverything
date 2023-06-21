@@ -1,11 +1,7 @@
 package com.example.storeeverything.Controllers;
 
-import com.example.storeeverything.Dtos.LinkedItemDto;
-import com.example.storeeverything.Dtos.ShareItemDto;
 import com.example.storeeverything.Entities.Item;
 import com.example.storeeverything.Services.LinkedItemsService;
-import com.example.storeeverything.Services.UserServiceImpl;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,8 +11,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/SharedLinks")
 public class LinkedItemsController {
 
-    @Autowired
-    private UserServiceImpl userService;
     @Autowired
     private LinkedItemsService linkedItemsService;
 

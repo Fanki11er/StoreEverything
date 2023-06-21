@@ -4,10 +4,7 @@ import com.example.storeeverything.Dtos.LinkedItemDto;
 import com.example.storeeverything.Dtos.UserDto;
 import com.example.storeeverything.Dtos.ShareItemDto;
 import com.example.storeeverything.Entities.Item;
-import com.example.storeeverything.Services.CategoryService;
-import com.example.storeeverything.Services.ItemService;
-import com.example.storeeverything.Services.LinkedItemsService;
-import com.example.storeeverything.Services.UserServiceImpl;
+import com.example.storeeverything.Services.*;
 import com.example.storeeverything.Utils.Sort;
 import com.example.storeeverything.Utils.SortBy;
 import com.example.storeeverything.Utils.SortCookie;
@@ -39,7 +36,7 @@ public class ItemController {
     private CategoryService categoryService;
 
     @Autowired
-    private UserServiceImpl userService;
+    private UserService userService;
 
     @Autowired
     private LinkedItemsService linkedItemsService;

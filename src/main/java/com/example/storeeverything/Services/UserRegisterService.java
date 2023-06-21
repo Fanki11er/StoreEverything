@@ -1,26 +1,18 @@
 package com.example.storeeverything.Services;
+
+import com.example.storeeverything.Dtos.UserDto;
 import com.example.storeeverything.Dtos.UserRegistrationDto;
 import com.example.storeeverything.Entities.User;
-import com.example.storeeverything.Repositories.UserRepository;
-import com.example.storeeverything.Role;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Service;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-@Service
-public class UserRegisterService {
+import java.util.ArrayList;
+import java.util.List;
 
-    @Autowired
-    BCryptPasswordEncoder passwordEncoder;
-    @Autowired
-    UserRepository userRepository;
-    public User save(UserRegistrationDto registrationDto) {
-        User user = new User(registrationDto.getFirstName(),
-                registrationDto.getSurname(),
-                registrationDto.getLogin(),
-                passwordEncoder.encode(registrationDto.getPassword()),
-                registrationDto.getEmail(),
-                Role.LIMITED);
-        return  userRepository.save(user);
-    }
+public interface UserRegisterService extends UserDetailsService {
+
+    User save(UserRegistrationDto registrationDto);
+    UserDetails loadUserByUsername(String username);
+
 }

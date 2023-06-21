@@ -5,6 +5,7 @@ import com.example.storeeverything.Entities.Category;
 import com.example.storeeverything.Entities.Item;
 import com.example.storeeverything.Repositories.ItemRepository;
 import com.example.storeeverything.Services.ItemService;
+import com.example.storeeverything.Services.UserService;
 import com.example.storeeverything.Services.UserServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -29,7 +30,7 @@ class ItemServiceTest {
     private ItemRepository itemRepository;
 
     @Mock
-    private UserServiceImpl userService;
+    private UserService userService;
 
     @InjectMocks
     private ItemService itemService;

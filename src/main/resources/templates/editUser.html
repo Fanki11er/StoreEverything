@@ -27,8 +27,8 @@
         <span class="card-text col" th:text="${user.getSurname()}"></span>
       </div>
       <div class="row">
-        <span class="card-title fw-bold col-auto" >Wiek:</span>
-        <span class="card-text col" th:text="${user.getAge()}"></span>
+        <span class="card-title fw-bold col-auto" >Email:</span>
+        <span class="card-text col" th:text="${user.getEmail()}"></span>
       </div>
 
       <form th:action="@{'/App/Admin/User/Edit/' + ${user.getId()}}" th:object="${newRole}" method="post" novalidate>
