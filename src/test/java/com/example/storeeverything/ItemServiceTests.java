@@ -63,7 +63,7 @@ class ItemServiceTest {
         itemDto.setTitle("Test Item");
         itemDto.setContent("Test Content");
         itemDto.setCategory(category);
-        itemDto.setUrl("http://example.com");
+        itemDto.setUrl("http://test.com");
 
         // Act
         itemService.addNewItem(itemDto);

@@ -2,7 +2,7 @@ package com.example.storeeverything.Controllers;
 import com.example.storeeverything.Dtos.NewRoleDto;
 import com.example.storeeverything.Dtos.UserDto;
 import com.example.storeeverything.Role;
-import com.example.storeeverything.Services.UserServiceImpl;
+import com.example.storeeverything.Services.UserService;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 public class AdminController {
 
   @Autowired
-  UserServiceImpl userService;
+  UserService userService;
 
   @GetMapping("")
   public String getUsers(Model model) {
